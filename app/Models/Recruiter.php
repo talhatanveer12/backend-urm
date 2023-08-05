@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Recruiter extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
 }

@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Academia;
+use App\Models\Recruiter;
+use App\Models\DelOfficer;
 use Illuminate\Http\Request;
+use App\Models\UrmCandidates;
 use App\Http\Requests\LoginRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -35,14 +39,61 @@ class AuthController extends Controller
 
             //dd($request->all());
 
-            $inputs = $request->all();
+            $data = $request->all();
 
-            $inputs['password'] = Hash::make($inputs['password']);
-            $inputs['role_id'] = 1;
+            //$inputs['password'] = Hash::make($inputs['password']);
+
+            $user = User::create([
+                'username' => $data['username'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                'dob' => $data['dob'],
+                'address' => $data["address"],
+                'role_id' => $data['role']
+            ]);
+
+            if ($data['role'] === '2') {
+
+                UrmCandidates::create([
+                    'user_id' => $user->id,
+                    'frist_name' => $data['firstName'],
+                    'last_name' => $data['lastName'],
+                    'nationality' => $data['nationality'],
+                    'ethnicity' => $data['ethnicity'],
+                    'eduction' => $data['education'],
+                    'research_experience' => $data['researchExperience'],
+                    'phone_number' => $data['phoneNo'],
+                ]);
+            } elseif ($data['role'] === '3') {
+
+                Academia::create([
+                    'user_id' => $user->id,
+                    'institution_name' => $data['institutionName'],
+                    'institution_address' => $data['institutionAddress'],
+                    'phone_number' => $data['phoneNo'],
+                ]);
+            } elseif ($data['role'] === '4') {
+
+                Recruiter::create([
+                    'user_id' => $user->id,
+                    'company_name' => $data['companyName'],
+                    'company_address' => $data['companyAddress'],
+                    'phone_number' => $data['phoneNo'],
+                ]);
+            } elseif ($data['role'] === '5') {
+
+                DelOfficer::create([
+                    'user_id' => $user->id,
+                    'organization_name' => $data['organizationName'],
+                    'organization_address' => $data['organizationAddress'],
+                    'phone_number' => $data['phoneNo'],
+                ]);
+            }
+
 
             //dd($inputs);
 
-            $user = User::create($inputs);
+
 
             $credentials = array(
                 'email' => $request->email,

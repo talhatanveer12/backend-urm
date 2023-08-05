@@ -19,28 +19,28 @@ class DatabaseSeeder extends Seeder
         // DB::table('users')->delete();
 
         // // //Entry for Admin
-        $user = User::create([
-            'username' => 'Admin',
-            'email' => 'admin.dev@gmail.com',
-            'password' => Hash::make('password'),
-            'dob' => '2023-08-05',
-            'role_id' => 1,
-        ]);
+        // $user = User::create([
+        //     'username' => 'Admin',
+        //     'email' => 'admin.dev@gmail.com',
+        //     'password' => Hash::make('password'),
+        //     'dob' => '2023-08-05',
+        //     'role_id' => 1,
+        // ]);
 
-        // Role::create([
-        //     'role_name' => 'Admin'
-        // ]);
-        // Role::create([
-        //     'role_name' => 'URM Candidate'
-        // ]);
-        // Role::create([
-        //     'role_name' => 'Academia'
-        // ]);
-        // Role::create([
-        //     'role_name' => 'Del Officer'
-        // ]);
-        // Role::create([
-        //     'role_name' => 'Recruiter'
-        // ]);
+        Role::create([
+            'role_name' => 'Admin'
+        ]);
+        Role::create([
+            'role_name' => 'URM Candidate'
+        ]);
+        Role::create([
+            'role_name' => 'Academia'
+        ]);
+        Role::create([
+            'role_name' => 'Del Officer'
+        ]);
+        Role::create([
+            'role_name' => 'Recruiter'
+        ]);
     }
 }
